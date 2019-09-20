@@ -1,0 +1,2 @@
+# SsMgit
+ Screenshot manager
