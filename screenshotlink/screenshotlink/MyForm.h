@@ -89,6 +89,11 @@ namespace screenshotlink {
 	private: System::Windows::Forms::LinkLabel^ linkLabel31;
 	private: System::Windows::Forms::LinkLabel^ linkLabel30;
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
+	private: System::Windows::Forms::ToolStripMenuItem^ logoutNASToolStripMenuItem;
+
+
+
+
 
 
 
@@ -111,6 +116,7 @@ namespace screenshotlink {
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->menuToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->loginNASToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->logoutNASToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -181,9 +187,9 @@ namespace screenshotlink {
 			// 
 			// menuToolStripMenuItem
 			// 
-			this->menuToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->menuToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->loginNASToolStripMenuItem,
-					this->exitToolStripMenuItem
+					this->logoutNASToolStripMenuItem, this->exitToolStripMenuItem
 			});
 			this->menuToolStripMenuItem->Name = L"menuToolStripMenuItem";
 			this->menuToolStripMenuItem->Size = System::Drawing::Size(44, 21);
@@ -192,14 +198,20 @@ namespace screenshotlink {
 			// loginNASToolStripMenuItem
 			// 
 			this->loginNASToolStripMenuItem->Name = L"loginNASToolStripMenuItem";
-			this->loginNASToolStripMenuItem->Size = System::Drawing::Size(125, 22);
+			this->loginNASToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->loginNASToolStripMenuItem->Text = L"登入NAS";
-			this->loginNASToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::LoginNASToolStripMenuItem_Click);
+			// 
+			// logoutNASToolStripMenuItem
+			// 
+			this->logoutNASToolStripMenuItem->Name = L"logoutNASToolStripMenuItem";
+			this->logoutNASToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->logoutNASToolStripMenuItem->Text = L"登出NAS";
+			this->logoutNASToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::logoutNASToolStripMenuItem_Click);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
-			this->exitToolStripMenuItem->Size = System::Drawing::Size(125, 22);
+			this->exitToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->exitToolStripMenuItem->Text = L"退出";
 			this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::ExitToolStripMenuItem_Click);
 			// 
@@ -644,7 +656,7 @@ namespace screenshotlink {
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
 			this->tabPage2->Size = System::Drawing::Size(666, 529);
 			this->tabPage2->TabIndex = 1;
-			this->tabPage2->Text = L"帳號部(建設中)";
+			this->tabPage2->Text = L"帳號部";
 			this->tabPage2->UseVisualStyleBackColor = true;
 			// 
 			// linkLabel39
@@ -807,6 +819,9 @@ namespace screenshotlink {
 	private: System::Void LoginNASToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		system("NET USE \\\\10.224.22.219 /user:fileserver19\\administrator !qaz2wsx");
 		ShellExecute(NULL, NULL, L"\\\\10.224.22.219\\Screen", NULL, NULL, SW_SHOWNORMAL);
+	}
+	private: System::Void logoutNASToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		system("NET USE \\\\10.224.22.219 /delete");
 	}
 	private: System::Void ExitToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		Application::Exit();
