@@ -1,3 +1,4 @@
 ﻿  MyForm.cpp
-  MyForm.obj : 發現 MSIL 模組。MSIL 的累加連結已停用。正在執行完整連結
-  screenshotlink.vcxproj -> C:\Users\strike lo\source\repos\screenshotlink\Debug\screenshotlink.exe
+  .NETFramework,Version=v4.6.1.AssemblyAttributes.cpp
+  MyForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  screenshotlink.vcxproj -> C:\Users\Strike8K\Documents\GitHub\SsMgit\screenshotlink\Debug\screenshotlink.exe
