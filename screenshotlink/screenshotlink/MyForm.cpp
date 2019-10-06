@@ -1,10 +1,13 @@
 #include "MyForm.h"
 
 using namespace System;
-[STAThreadAttribute]
-
+using namespace System::Windows::Forms;
+//[STAThreadAttribute]
+[STAThread]
 int main()
 {
-	Windows::Forms::Application::Run(gcnew screenshotlink::MyForm());
+	Application::EnableVisualStyles();
+	Application::SetCompatibleTextRenderingDefault(false);
+	Application::Run(gcnew screenshotlink::MyForm());
 	return 0;
 }
