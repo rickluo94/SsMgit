@@ -51,10 +51,13 @@ namespace screenshotlink {
 	private: System::Windows::Forms::ToolStripMenuItem^ loginNASToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ logoutNASToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ exitToolStripMenuItem;
-	private: System::Windows::Forms::PictureBox^ pictureBox2;
+
 	private: System::Windows::Forms::PictureBox^ pictureBox3;
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::FolderBrowserDialog^ folderBrowserDialog1;
+	private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
+	private: System::Windows::Forms::PictureBox^ pictureBox2;
+
 
 
 	protected:
@@ -84,7 +87,6 @@ namespace screenshotlink {
 			this->comboBox3 = (gcnew System::Windows::Forms::ComboBox());
 			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
-			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
 			this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
@@ -93,14 +95,16 @@ namespace screenshotlink {
 			this->logoutNASToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->folderBrowserDialog1 = (gcnew System::Windows::Forms::FolderBrowserDialog());
+			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
+			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->tabPage2->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			this->tabPage3->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
 			this->menuStrip1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// comboBox1
@@ -121,10 +125,10 @@ namespace screenshotlink {
 			this->tabControl1->Controls->Add(this->tabPage1);
 			this->tabControl1->Controls->Add(this->tabPage2);
 			this->tabControl1->Controls->Add(this->tabPage3);
-			this->tabControl1->Location = System::Drawing::Point(12, 27);
+			this->tabControl1->Location = System::Drawing::Point(0, 27);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
-			this->tabControl1->Size = System::Drawing::Size(936, 595);
+			this->tabControl1->Size = System::Drawing::Size(948, 595);
 			this->tabControl1->TabIndex = 1;
 			// 
 			// tabPage1
@@ -139,19 +143,20 @@ namespace screenshotlink {
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(928, 569);
+			this->tabPage1->Size = System::Drawing::Size(940, 569);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"速查預覽";
 			this->tabPage1->UseVisualStyleBackColor = true;
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(729, 4);
+			this->button2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->button2->Location = System::Drawing::Point(822, 544);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->Size = System::Drawing::Size(112, 23);
 			this->button2->TabIndex = 6;
-			this->button2->Text = L"button2";
-			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Text = L"另存圖片";
+			this->button2->UseVisualStyleBackColor = false;
 			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
 			// button1
@@ -172,7 +177,7 @@ namespace screenshotlink {
 			this->pictureBox1->BackColor = System::Drawing::Color::Silver;
 			this->pictureBox1->Location = System::Drawing::Point(6, 32);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(798, 537);
+			this->pictureBox1->Size = System::Drawing::Size(810, 537);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox1->TabIndex = 4;
 			this->pictureBox1->TabStop = false;
@@ -184,9 +189,9 @@ namespace screenshotlink {
 			this->listBox1->FormattingEnabled = true;
 			this->listBox1->HorizontalScrollbar = true;
 			this->listBox1->ItemHeight = 12;
-			this->listBox1->Location = System::Drawing::Point(810, 6);
+			this->listBox1->Location = System::Drawing::Point(822, 30);
 			this->listBox1->Name = L"listBox1";
-			this->listBox1->Size = System::Drawing::Size(112, 556);
+			this->listBox1->Size = System::Drawing::Size(112, 508);
 			this->listBox1->TabIndex = 3;
 			this->listBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::listBox1_SelectedIndexChanged);
 			// 
@@ -221,20 +226,6 @@ namespace screenshotlink {
 			this->tabPage2->Text = L"財務部";
 			this->tabPage2->UseVisualStyleBackColor = true;
 			// 
-			// pictureBox2
-			// 
-			this->pictureBox2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->pictureBox2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.BackgroundImage")));
-			this->pictureBox2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
-			this->pictureBox2->Location = System::Drawing::Point(-4, 0);
-			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(936, 573);
-			this->pictureBox2->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-			this->pictureBox2->TabIndex = 0;
-			this->pictureBox2->TabStop = false;
-			// 
 			// tabPage3
 			// 
 			this->tabPage3->Controls->Add(this->pictureBox3);
@@ -262,10 +253,11 @@ namespace screenshotlink {
 			// 
 			// menuStrip1
 			// 
+			this->menuStrip1->BackColor = System::Drawing::SystemColors::ScrollBar;
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->menuToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(960, 25);
+			this->menuStrip1->Size = System::Drawing::Size(960, 24);
 			this->menuStrip1->TabIndex = 2;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -276,37 +268,58 @@ namespace screenshotlink {
 					this->logoutNASToolStripMenuItem, this->exitToolStripMenuItem
 			});
 			this->menuToolStripMenuItem->Name = L"menuToolStripMenuItem";
-			this->menuToolStripMenuItem->Size = System::Drawing::Size(53, 21);
+			this->menuToolStripMenuItem->Size = System::Drawing::Size(52, 20);
 			this->menuToolStripMenuItem->Text = L"Menu";
 			// 
 			// loginNASToolStripMenuItem
 			// 
 			this->loginNASToolStripMenuItem->Name = L"loginNASToolStripMenuItem";
-			this->loginNASToolStripMenuItem->Size = System::Drawing::Size(139, 22);
+			this->loginNASToolStripMenuItem->Size = System::Drawing::Size(137, 22);
 			this->loginNASToolStripMenuItem->Text = L"LoginNAS";
 			this->loginNASToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::loginNASToolStripMenuItem_Click);
 			// 
 			// logoutNASToolStripMenuItem
 			// 
 			this->logoutNASToolStripMenuItem->Name = L"logoutNASToolStripMenuItem";
-			this->logoutNASToolStripMenuItem->Size = System::Drawing::Size(139, 22);
+			this->logoutNASToolStripMenuItem->Size = System::Drawing::Size(137, 22);
 			this->logoutNASToolStripMenuItem->Text = L"logoutNAS";
 			this->logoutNASToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::logoutNASToolStripMenuItem_Click);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
-			this->exitToolStripMenuItem->Size = System::Drawing::Size(139, 22);
+			this->exitToolStripMenuItem->Size = System::Drawing::Size(137, 22);
 			this->exitToolStripMenuItem->Text = L"Exit";
 			this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::exitToolStripMenuItem_Click);
+			// 
+			// saveFileDialog1
+			// 
+			this->saveFileDialog1->FileName = L"*.jpg";
+			this->saveFileDialog1->Filter = L"JPG Image (.jpg)|*.jpg";
+			// 
+			// pictureBox2
+			// 
+			this->pictureBox2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->pictureBox2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.BackgroundImage")));
+			this->pictureBox2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
+			this->pictureBox2->Location = System::Drawing::Point(-4, 0);
+			this->pictureBox2->Name = L"pictureBox2";
+			this->pictureBox2->Size = System::Drawing::Size(936, 573);
+			this->pictureBox2->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->pictureBox2->TabIndex = 0;
+			this->pictureBox2->TabStop = false;
 			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::SystemColors::Window;
 			this->ClientSize = System::Drawing::Size(960, 634);
 			this->Controls->Add(this->tabControl1);
 			this->Controls->Add(this->menuStrip1);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
@@ -314,11 +327,11 @@ namespace screenshotlink {
 			this->tabPage1->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->tabPage2->ResumeLayout(false);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
 			this->tabPage3->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -358,9 +371,19 @@ namespace screenshotlink {
 		pictureBox1->ImageLocation = listBox1->SelectedItem->ToString();
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		folderBrowserDialog1->ShowDialog();
-		
-		
+		if (pictureBox1->Image != nullptr)
+		{
+			if (saveFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+			{
+				pictureBox1->Image->Save(saveFileDialog1->FileName);
+			}
+		}
+		else
+		{
+			MessageBox::Show(
+				"請選擇圖片",
+				"錯誤", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+		}
 	}
 };
 }
